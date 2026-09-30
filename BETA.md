@@ -55,6 +55,29 @@ On Windows, use `.\vibead-beta.exe claude --mode interactive`. Replace `claude` 
 
 Authenticated-provider testing is a separate stage. Fixture success does not establish authenticated success. See the specific release notes for versions and platforms actually tested.
 
+## Claude Code through your gateway (beta.3 or later)
+
+Beta.2 filters out custom Claude gateway variables; download and extract a complete beta.3 or later archive first. In interactive and authenticated modes, Vibead forwards `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL` and `ANTHROPIC_AUTH_TOKEN` to Claude. The default fixture mode ignores these variables and uses its local simulator.
+
+For macOS's default **zsh**, run this from the extracted archive folder. Replace the URL and model with the values supplied by your gateway. Enter only the token at the hidden prompt, without a `Bearer ` prefix:
+
+```zsh
+(
+  unset ANTHROPIC_API_KEY
+  export ANTHROPIC_BASE_URL="https://your-gateway.example"
+  export ANTHROPIC_MODEL="your-gateway-model-id"
+  read -rs 'ANTHROPIC_AUTH_TOKEN?Gateway token: '; echo
+  export ANTHROPIC_AUTH_TOKEN
+  ./vibead-beta claude --mode interactive
+)
+```
+
+The parentheses keep these settings local to this test. Complete Claude's onboarding or workspace trust prompts if shown. Submit a prompt that takes several seconds, check that a disclosed test ad appears during thinking, wait for the complete answer, then exit Claude normally. A report is written under `vibead-beta-results`. This uses your real gateway for model responses; the ad service remains local and synthetic.
+
+If you already exported the three variables, run `./vibead-beta claude --mode interactive` directly. For the automated factorial check instead, use `./vibead-beta claude --mode authenticated`. Automated mode accepts either `ANTHROPIC_AUTH_TOKEN` or `ANTHROPIC_API_KEY`; its `--model` option overrides `ANTHROPIC_MODEL`. Both live modes can incur provider charges.
+
+Use the gateway's Anthropic-compatible endpoint and exact model identifier. Claude sends `ANTHROPIC_AUTH_TOKEN` as an `Authorization: Bearer` header; see [Claude's gateway setup](https://code.claude.com/docs/en/llm-gateway-connect). Vibead does not write this token or gateway URL to its report. Your normal saved Claude settings and login are not copied into the temporary workspace.
+
 ## Report the outcome and remove the beta
 
 Reports contain versions, timings and boolean checks, not prompt text, source code, terminal captures, model responses or credentials. They stay local. Review a report before choosing to share it in an issue, along with your OS, agent version and whether you used fixture or interactive mode. Avoid screenshots containing personal information.
