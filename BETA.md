@@ -1,6 +1,6 @@
 # Beta test with your existing AI agent setup
 
-**Beta.4 keeps the setup you already use:** your home directory, saved login, model/provider configuration, custom configuration directories, project files, settings, plugins and exported environment. You launch through Vibead from your usual project, and it adds local mock advertisements during supported thinking states.
+**Beta.5 keeps the setup you already use:** your home directory, saved login, model/provider configuration, custom configuration directories, project files, settings, plugins and exported environment. You launch through Vibead from your usual project, and it adds local mock advertisements during supported thinking states.
 
 No new account setup, private checkout or separate ad server is required by Vibead. Your agent's own permissions, trust prompts and provider charges still apply.
 
@@ -12,8 +12,8 @@ No new account setup, private checkout or separate ad server is required by Vibe
 
 | Your Mac | Archive | Checksum file |
 | --- | --- | --- |
-| Apple Silicon | [Download ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-arm64.tar.gz) | [ARM64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-arm64.tar.gz.sha256) |
-| Intel | [Download x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-x64.tar.gz) | [x64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-x64.tar.gz.sha256) |
+| Apple Silicon | [Download ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-arm64.tar.gz) | [ARM64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-arm64.tar.gz.sha256) |
+| Intel | [Download x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-x64.tar.gz) | [x64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-x64.tar.gz.sha256) |
 
 2. In Terminal, run the block for **your Mac only**. It checks the download and extracts it only if the checksum matches. These commands leave your terminal's working directory unchanged.
 
@@ -22,8 +22,8 @@ Apple Silicon:
 ```sh
 (
   cd "$HOME/Downloads" &&
-  shasum -a 256 -c vibead-beta-0.1.0-beta.4-darwin-arm64.tar.gz.sha256 &&
-  tar -xzf vibead-beta-0.1.0-beta.4-darwin-arm64.tar.gz
+  shasum -a 256 -c vibead-beta-0.1.0-beta.5-darwin-arm64.tar.gz.sha256 &&
+  tar -xzf vibead-beta-0.1.0-beta.5-darwin-arm64.tar.gz
 )
 ```
 
@@ -32,8 +32,8 @@ Intel:
 ```sh
 (
   cd "$HOME/Downloads" &&
-  shasum -a 256 -c vibead-beta-0.1.0-beta.4-darwin-x64.tar.gz.sha256 &&
-  tar -xzf vibead-beta-0.1.0-beta.4-darwin-x64.tar.gz
+  shasum -a 256 -c vibead-beta-0.1.0-beta.5-darwin-x64.tar.gz.sha256 &&
+  tar -xzf vibead-beta-0.1.0-beta.5-darwin-x64.tar.gz
 )
 ```
 
@@ -59,7 +59,7 @@ If you extracted elsewhere, change the path. This variable lasts for the current
 | Codex | `"$VIBEAD_BETA" codex` | Press Ctrl+C twice |
 | OpenCode | `"$VIBEAD_BETA" opencode` | Enter `/exit` |
 
-**No `--mode interactive` is needed in beta.4.** Your existing provider, model, login, exported environment and current project remain in use. If plain `claude` already works with `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL` and `ANTHROPIC_AUTH_TOKEN`, keep those settings and launch Vibead from that same shell. Do not copy or send us your token. Saved Codex and OpenCode setups are reused in the same way.
+**No `--mode interactive` is needed in beta.4 or later.** Your existing provider, model, login, exported environment and current project remain in use. If plain `claude` already works with `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL` and `ANTHROPIC_AUTH_TOKEN`, keep those settings and launch Vibead from that same shell. Do not copy or send us your token. Saved Codex and OpenCode setups are reused in the same way.
 
 Review any native trust prompt. In Codex, review the Vibead hooks and approve the ones you intend to run; `/hooks` opens the hook controls. Vibead does not approve customer hooks automatically. Close the hook menu before sending your prompt.
 
@@ -73,21 +73,21 @@ Repeat for each installed agent and share one report per agent. Include your Mac
 open "$HOME/.vibead-beta/results"
 ```
 
-If you only see `Vibead beta: passed` from an automatic test without your normal session, check that you downloaded **beta.4** and omitted `--mode fixture`. Older releases used the simulated test by default.
+If you only see `Vibead beta: passed` from an automatic test without your normal session, check that you downloaded **beta.5** and omitted `--mode fixture`. Older releases used the simulated test by default.
 
 If macOS blocks the executable, see [platform notes](#platform-notes). If you force-killed a session, use the [recovery command](#recovery-after-a-crash-or-forced-termination) before trying again or deleting the folder.
 
-Gemini is also supported on qualified Mac builds: use `"$VIBEAD_BETA" gemini`. Other-platform availability is listed in the release; Windows beta.4 remains under qualification.
+Gemini is also supported on qualified Mac builds: use `"$VIBEAD_BETA" gemini`. Use only platform downloads listed in the release.
 
 ## 1. Download
 
-Get an archive and its `.sha256` file from [beta.4 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.4):
+Get an archive and its `.sha256` file from [beta.5 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5):
 
 | Computer | Archive ending |
 | --- | --- |
 | Mac with Apple Silicon | `darwin-arm64.tar.gz` |
 | Mac with Intel processor | `darwin-x64.tar.gz` |
-| Windows x64 | Beta.4 download pending qualification |
+| Windows x64 | `win32-x64.zip` |
 | Linux x64 | `linux-x64.tar.gz` |
 
 Compare the checksum with the value in the `.sha256` file, replacing `ARCHIVE` with the downloaded filename:
@@ -127,7 +127,7 @@ Choose the agent name you normally use:
 | Gemini CLI | `gemini` |
 | OpenCode | `opencode` |
 
-**The short command now uses your real setup by default.** Adding `--mode interactive` has the same effect in beta.4. You do not need to copy credentials into Vibead or sign in again just for the beta. Your agent can still request login if its existing credentials have expired or are unavailable.
+**The short command now uses your real setup by default.** Adding `--mode interactive` has the same effect in beta.4 or later. You do not need to copy credentials into Vibead or sign in again just for the beta. Your agent can still request login if its existing credentials have expired or are unavailable.
 
 Complete the agent's normal project-trust prompts. Approve the new Vibead hooks if your agent requests it; for Codex, check `/hooks`. Vibead does not approve hooks, change your permissions or disable organization policies for you.
 
@@ -146,11 +146,11 @@ No model override is needed if you want the agent's saved default. Shell aliases
 
 ### Claude Code through your gateway (beta.3 or later)
 
-In beta.4, keep the same gateway configuration that already works with plain `claude`: settings files or exported `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL` and `ANTHROPIC_AUTH_TOKEN` remain available. Simply launch the wrapper from the same shell and project. The local mock ad service does not replace your model gateway.
+In beta.4 or later, keep the same gateway configuration that already works with plain `claude`: settings files or exported `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL` and `ANTHROPIC_AUTH_TOKEN` remain available. Simply launch the wrapper from the same shell and project. The local mock ad service does not replace your model gateway.
 
 If you are configuring a gateway for the first time, follow [Claude's gateway setup](https://code.claude.com/docs/en/llm-gateway-connect), confirm plain `claude` works, then launch through Vibead. Do not send us your token. The same principle applies to Codex, Gemini and OpenCode: keep their working provider setup; Vibead inherits it.
 
-Beta.3 forwarded those three Claude variables but still used a fresh temporary home. Beta.2 filtered them. Use beta.4 for the full existing-setup path.
+Beta.3 forwarded those three Claude variables but still used a fresh temporary home. Beta.2 filtered them. Use beta.5 for the full existing-setup path.
 
 ## 3. Check the ad during normal use
 
@@ -198,13 +198,19 @@ To run an optional diagnostic, use `"/path/to/vibead-beta" AGENT --mode fixture`
 
 The separate automated authenticated mode requires `OPENAI_API_KEY` for Codex/OpenCode, `GEMINI_API_KEY` for Gemini, or `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN` for Claude. It accepts `--model MODEL`; Claude also accepts the gateway URL/model variables. Unlike the primary mode, it does not reuse saved account configuration. Provider charges may apply.
 
+## Compatibility
+
+You do not need to upgrade your agent merely to match our test version. Vibead detects required capabilities and recognizes supported status layouts; version numbers are observations, not an allowlist. This does not guarantee every old or future release works. An agent must provide usable lifecycle events and a recognizable generic status label for ad replacement.
+
+Release notes list combinations actually tested. Other OS versions, terminal applications, themes and agent versions remain unverified until exercised. An unfamiliar status layout should leave native output intact; a no-ad report is still a compatibility failure to investigate, not successful ad delivery. Report your agent version, OS version and the status label, without prompts or credentials.
+
 ## Platform notes
 
-**OpenCode beta.4 display issue:** some normal thinking layouts are not recognized, including titled reasoning headers and the static spinner used with animations disabled. Ads may be assigned without becoming visible. A correction has passed local native-renderer tests but is not yet in these downloads. If affected, share your report and the status label you saw; do not change your OS, provider or working setup, or keep spending model turns on longer prompts to retry this issue.
+**OpenCode:** beta.5 recognizes both animated and static `Thinking` labels, including a following reasoning title. Only the generic label changes; the title stays intact. This corrects a beta.4 gap reproduced with OpenCode 1.18.33. If ads are still absent, share the report and the exact status label you saw without prompts or credentials.
 
 These builds are not publisher-signed or notarized. macOS uses an ad hoc signature; Windows may show an unrecognized-publisher warning. Hosted tests do not establish desktop approval or enterprise-policy behavior. Do not disable system-wide security controls to run a beta.
 
-Windows Codex teardown can print an `AttachConsole failed` helper warning even when display/cleanup checks pass. Retain the JSON report and check its status. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.4) identify tested versions, platforms and known limits.
+Windows Codex teardown can print an `AttachConsole failed` helper warning even when display/cleanup checks pass. Retain the JSON report and check its status. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5) identify tested versions, platforms and known limits.
 
 ## Remove or upgrade
 

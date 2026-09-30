@@ -1,19 +1,19 @@
 # Try Vibead with your usual AI agent setup
 
-Vibead adds disclosed test advertisements to supported thinking rows in **Claude Code, Codex, Gemini CLI and OpenCode**. Beta.4 uses your existing login, model/provider configuration, settings and current project. Its local mock ad service starts automatically.
+Vibead adds disclosed test advertisements to supported thinking rows in **Claude Code, Codex, Gemini CLI and OpenCode**. Beta.5 uses your existing login, model/provider configuration, settings and current project. Its local mock ad service starts automatically.
 
 **Mac downloads are ready for beta testing.** Follow the [Mac quick start for Claude Code, Codex and OpenCode](BETA.md#mac-quick-start-claude-code-codex-and-opencode) for direct downloads, copy-and-paste checksum/extraction commands and a test checklist. You can use your existing Claude gateway or agent login. No API key needs to be given to Vibead. Automated qualification used simulated model responses; your test checks your own account and provider too.
 
 ## 1. Download
 
-Download the complete archive and its `.sha256` file from [beta.4 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.4). [Verify the checksum](BETA.md#1-download), then extract it somewhere convenient and keep its files together.
+Download the complete archive and its `.sha256` file from [beta.5 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5). [Verify the checksum](BETA.md#1-download), then extract it somewhere convenient and keep its files together.
 
 | Computer | Download |
 | --- | --- |
-| Apple Silicon Mac | [macOS ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-arm64.tar.gz) |
-| Intel Mac | [macOS x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-x64.tar.gz) |
-| Windows x64 | Beta.4 qualification pending; use only downloads listed in the release |
-| Linux x64 | [Linux archive](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-linux-x64.tar.gz) |
+| Apple Silicon Mac | [macOS ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-arm64.tar.gz) |
+| Intel Mac | [macOS x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-x64.tar.gz) |
+| Windows x64 | [Windows archive](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-win32-x64.zip) |
+| Linux x64 | [Linux archive](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-linux-x64.tar.gz) |
 
 Your agent must already work in your terminal. Vibead needs no private repository, npm installation, compiler or separately managed server. These beta builds are not publisher-signed or notarized; see the [platform notes](BETA.md#platform-notes).
 
@@ -42,7 +42,7 @@ Windows PowerShell example:
 & "C:\path\to\vibead-beta.exe" claude
 ```
 
-**You no longer need `--mode interactive`: it is the default in beta.4.** Your home directory, project and provider environment are retained. You should only see login or project-trust prompts your agent itself requires, plus approval for Vibead's new hooks where the agent requires it. For Codex, review `/hooks` when prompted.
+**You no longer need `--mode interactive`: it is the default since beta.4.** Your home directory, project and provider environment are retained. You should only see login or project-trust prompts your agent itself requires, plus approval for Vibead's new hooks where the agent requires it. For Codex, review `/hooks` when prompted.
 
 Use your usual native arguments after `--`, for example:
 
@@ -65,12 +65,12 @@ Exit the agent normally. Vibead removes its session integration and prints the l
 
 `"/path/to/vibead-beta" claude --mode fixture` runs the old isolated simulated-model test without credentials or model charges. Replace `claude` with any of the four agents. This is optional; it does not test your usual account or configuration.
 
-Beta.3 and earlier defaulted to this simulated test, and their interactive mode used an empty temporary home. Upgrade the complete archive to beta.4 for the existing-setup experience.
+Beta.3 and earlier defaulted to this simulated test, and their interactive mode used an empty temporary home. Upgrade the complete archive to beta.5 for the existing-setup experience.
 
 ## Scope
 
-OpenCode beta.4 has a [known display issue with some thinking layouts](BETA.md#platform-notes). A corrected download is pending; successful ad decisions alone do not mean an ad was displayed.
+Beta.5 recognizes OpenCode’s titled and static thinking labels while preserving reasoning titles. It also reduces Windows hook startup overhead. Successful ad decisions alone do not mean an ad was displayed; check the report and the screen.
 
 This is an explicit beta wrapper. Keep launching your ordinary agent directly whenever you do not want Vibead. Automatic activation through your usual command name remains later distribution work. Native permissions, trust prompts and organization policies still apply; unsupported cases preserve the agent's normal launch without ads.
 
-Source and server code remain private. Synthetic ads generate no earnings or credits. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.4) identify exact tested agents/platforms and limits; simulated-model qualification does not establish live-provider or physical-desktop acceptance.
+Source and server code remain private. Synthetic ads generate no earnings or credits. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5) identify exact tested agents/platforms and limits; simulated-model qualification does not establish live-provider or physical-desktop acceptance.
