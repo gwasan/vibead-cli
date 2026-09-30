@@ -14,8 +14,9 @@ Download the complete archive and its `.sha256` file from [beta.6 Releases](http
 | --- | --- |
 | Apple Silicon Mac | [macOS ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz) |
 | Intel Mac | [macOS x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz) |
-| Windows x64 | [Windows archive](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-win32-x64.zip) |
 | Linux x64 | [Linux archive](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-linux-x64.tar.gz) |
+
+**Windows beta.6 is deferred.** The [previous beta.5 release](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5) remains available for plain-ad testing; it does not support `--test-links`. This release targets Mac and Linux.
 
 Your agent must already work in your terminal. Vibead needs no private repository, npm installation, compiler or separately managed server. These beta builds are not publisher-signed or notarized; see the [platform notes](BETA.md#platform-notes).
 
@@ -38,7 +39,7 @@ VIBEAD_BETA="$HOME/Downloads/vibead-beta-darwin-arm64/vibead-beta"
 
 For an Intel Mac, replace `darwin-arm64` with `darwin-x64`. From your usual project, run `"$VIBEAD_BETA" claude`, `"$VIBEAD_BETA" codex`, or `"$VIBEAD_BETA" opencode`, one at a time. See the [Mac quick start](BETA.md#mac-quick-start-claude-code-codex-and-opencode) for what to check and how to exit.
 
-Windows PowerShell example:
+Legacy Windows beta.5 PowerShell example (plain ads only):
 
 ```powershell
 & "C:\path\to\vibead-beta.exe" claude
@@ -71,7 +72,7 @@ Beta.3 and earlier defaulted to this simulated test, and their interactive mode 
 
 ## Scope
 
-Beta.6 retains OpenCode’s titled/static thinking-label support and the reduced Windows hook startup overhead introduced in beta.5. It adds optional local click testing without changing the default plain-text experience. Successful ad decisions alone do not mean an ad was displayed; check the report and the screen.
+Beta.6 retains OpenCode’s titled/static thinking-label support introduced in beta.5. It adds optional local click testing without changing the default plain-text experience. Successful ad decisions alone do not mean an ad was displayed; check the report and the screen.
 
 This is an explicit beta wrapper. Keep launching your ordinary agent directly whenever you do not want Vibead. Automatic activation through your usual command name remains later distribution work. Native permissions, trust prompts and organization policies still apply; unsupported cases preserve the agent's normal launch without ads.
 

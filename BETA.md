@@ -4,19 +4,18 @@
 
 No new account setup, private checkout or separate ad server is required by Vibead. Your agent's own permissions, trust prompts and provider charges still apply.
 
-**Beta.6 adds optional clickable test ads.** Follow the [click-test instructions](#optional-clickable-ad-test-beta6). Older beta.5 downloads do not contain this feature; extract the complete beta.6 archive.
+**Beta.6 adds optional clickable test ads.** Follow the [click-test instructions](#optional-clickable-ad-test-beta6). Use the complete beta.6 archive for Mac or Linux; older beta.5 downloads do not contain this feature. **Windows beta.6 is deferred to the backlog.** The [previous Windows beta.5 release](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5) remains available for plain-ad testing only.
 
 ## Optional clickable-ad test (beta.6)
 
 This tests a synthetic ad opening a local browser page. It uses your existing agent account and project, starts its mock service automatically, and makes no advertiser requests. It does not test paid clicks, cash balances or payouts.
 
-1. Check the executable before starting: `"/path/to/vibead-beta" --help` on macOS/Linux, or `& "C:\path\to\vibead-beta.exe" --help` in PowerShell. It must list `--test-links`. Keep the complete beta.6 archive together; do not copy the executable over a beta.5 folder.
+1. Check the executable before starting: `"/path/to/vibead-beta" --help` on macOS/Linux. It must list `--test-links`. Keep the complete beta.6 archive together; do not copy the executable over a beta.5 folder.
 2. Open your usual project in a terminal from this table, directly rather than inside tmux or screen:
 
 | Platform | Initial link-test terminal | Open the ad |
 | --- | --- | --- |
 | macOS | iTerm2 | Hold Command and click the word `Beta` |
-| Windows | Windows Terminal | Hold Ctrl and click the word `Beta` |
 | Linux | A modern VTE terminal, such as GNOME Terminal | Use the terminal's Open Link gesture/menu, commonly Ctrl+click |
 
 These are initial capability checks, not a claim of physical-desktop qualification. Apple Terminal and unidentified terminals currently keep plain text. Remote/SSH sessions are outside this local-browser test: `127.0.0.1` must refer to the computer running both Vibead and the browser. Do not override terminal variables to force support.
@@ -30,11 +29,7 @@ These are initial capability checks, not a claim of physical-desktop qualificati
 "/path/to/vibead-beta" opencode --test-links
 ```
 
-On a Mac where you already set `VIBEAD_BETA` to beta.6, use `"$VIBEAD_BETA" claude --test-links`, changing the agent name as needed. PowerShell example:
-
-```powershell
-& "C:\path\to\vibead-beta.exe" claude --test-links
-```
+On a Mac where you already set `VIBEAD_BETA` to beta.6, use `"$VIBEAD_BETA" claude --test-links`, changing the agent name as needed. Windows clickable-ad testing is not included in this release.
 
 Keep gateway variables and saved logins as they normally are. Native agent arguments still follow `--`, for example `"/path/to/vibead-beta" claude --test-links -- --model my-model`.
 
@@ -142,7 +137,6 @@ Get an archive and its `.sha256` file from [beta.6 Releases](https://github.com/
 | --- | --- |
 | Mac with Apple Silicon | `darwin-arm64.tar.gz` |
 | Mac with Intel processor | `darwin-x64.tar.gz` |
-| Windows x64 | `win32-x64.zip` |
 | Linux x64 | `linux-x64.tar.gz` |
 
 Compare the checksum with the value in the `.sha256` file, replacing `ARCHIVE` with the downloaded filename:
@@ -166,7 +160,7 @@ cd "/path/to/your/project"
 "/path/to/vibead-beta" claude
 ```
 
-Windows PowerShell:
+Legacy Windows beta.5 PowerShell (plain ads only):
 
 ```powershell
 Set-Location "C:\path\to\your\project"
