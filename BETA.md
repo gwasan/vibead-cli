@@ -6,9 +6,40 @@ No new account setup, private checkout or separate ad server is required by Vibe
 
 ## Mac quick start: Claude Code, Codex and OpenCode
 
-1. Download the **beta.4** archive for your Mac from [Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.4), verify its checksum using the command below, then double-click the archive to extract it in Downloads. Keep the complete extracted folder together. Apple Silicon Macs use `darwin-arm64`; Intel Macs use `darwin-x64`.
-2. Open the same terminal and project where your agent already works. Stay in your project; you do not need to work from the download folder.
-3. Set the executable path in that terminal. For Apple Silicon:
+**Ready to try:** both Apple Silicon and Intel Mac downloads are published. Automated tests passed with real agent executables and simulated model responses. This test with your own account checks your normal provider and desktop experience too.
+
+1. Open Apple menu → **About This Mac**. A **Chip** such as Apple M1/M2/M3/M4 means Apple Silicon; an **Intel Processor** means Intel. Download **both files in the matching row** into Downloads:
+
+| Your Mac | Archive | Checksum file |
+| --- | --- | --- |
+| Apple Silicon | [Download ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-arm64.tar.gz) | [ARM64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-arm64.tar.gz.sha256) |
+| Intel | [Download x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-x64.tar.gz) | [x64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.4/vibead-beta-0.1.0-beta.4-darwin-x64.tar.gz.sha256) |
+
+2. In Terminal, run the block for **your Mac only**. It checks the download and extracts it only if the checksum matches. These commands leave your terminal's working directory unchanged.
+
+Apple Silicon:
+
+```sh
+(
+  cd "$HOME/Downloads" &&
+  shasum -a 256 -c vibead-beta-0.1.0-beta.4-darwin-arm64.tar.gz.sha256 &&
+  tar -xzf vibead-beta-0.1.0-beta.4-darwin-arm64.tar.gz
+)
+```
+
+Intel:
+
+```sh
+(
+  cd "$HOME/Downloads" &&
+  shasum -a 256 -c vibead-beta-0.1.0-beta.4-darwin-x64.tar.gz.sha256 &&
+  tar -xzf vibead-beta-0.1.0-beta.4-darwin-x64.tar.gz
+)
+```
+
+Expect a line ending in `OK`. If the check fails or either file is missing, download both files again before proceeding. If your browser already extracted and removed the archive, download it again with automatic extraction disabled. Keep the complete extracted folder together.
+
+3. Open the same terminal and project where your agent already works. Stay in your project; you do not need to work from the download folder. Set the executable path in that terminal. For Apple Silicon:
 
 ```sh
 VIBEAD_BETA="$HOME/Downloads/vibead-beta-darwin-arm64/vibead-beta"
@@ -20,7 +51,7 @@ For Intel:
 VIBEAD_BETA="$HOME/Downloads/vibead-beta-darwin-x64/vibead-beta"
 ```
 
-If you extracted elsewhere, change the path. Test one agent at a time:
+If you extracted elsewhere, change the path. This variable lasts for the current terminal session; set it again in a new terminal. Test one agent at a time:
 
 | Agent | Start it | Exit after testing |
 | --- | --- | --- |
@@ -36,6 +67,14 @@ Ask a normal question, or try: “Compare five sorting algorithms and explain th
 
 Exit normally and review the report printed by Vibead, under `~/.vibead-beta/results`. Share only that report JSON and your observations in a [beta issue](https://github.com/gwasan/vibead-cli/issues). A `failed` or `blocked` report is not a pass even if the agent answered. The report section below explains what is recorded.
 
+Repeat for each installed agent and share one report per agent. Include your Mac chip, macOS version, agent version, whether the ad appeared during thinking, and whether the answer and normal agent behavior stayed intact. To find the reports in Finder:
+
+```sh
+open "$HOME/.vibead-beta/results"
+```
+
+If you only see `Vibead beta: passed` from an automatic test without your normal session, check that you downloaded **beta.4** and omitted `--mode fixture`. Older releases used the simulated test by default.
+
 If macOS blocks the executable, see [platform notes](#platform-notes). If you force-killed a session, use the [recovery command](#recovery-after-a-crash-or-forced-termination) before trying again or deleting the folder.
 
 Gemini is also supported on qualified Mac builds: use `"$VIBEAD_BETA" gemini`. Other-platform availability is listed in the release; Windows beta.4 remains under qualification.
@@ -48,7 +87,7 @@ Get an archive and its `.sha256` file from [beta.4 Releases](https://github.com/
 | --- | --- |
 | Mac with Apple Silicon | `darwin-arm64.tar.gz` |
 | Mac with Intel processor | `darwin-x64.tar.gz` |
-| Windows x64 | `win32-x64.zip` |
+| Windows x64 | Beta.4 download pending qualification |
 | Linux x64 | `linux-x64.tar.gz` |
 
 Compare the checksum with the value in the `.sha256` file, replacing `ARCHIVE` with the downloaded filename:

@@ -2,7 +2,7 @@
 
 Vibead adds disclosed test advertisements to supported thinking rows in **Claude Code, Codex, Gemini CLI and OpenCode**. Beta.4 uses your existing login, model/provider configuration, settings and current project. Its local mock ad service starts automatically.
 
-**Testing on your Mac?** Follow the [Mac quick start](BETA.md#mac-quick-start-claude-code-codex-and-opencode). You can use your existing Claude gateway or agent login. No API key needs to be given to Vibead.
+**Mac downloads are ready for beta testing.** Follow the [Mac quick start for Claude Code, Codex and OpenCode](BETA.md#mac-quick-start-claude-code-codex-and-opencode) for direct downloads, copy-and-paste checksum/extraction commands and a test checklist. You can use your existing Claude gateway or agent login. No API key needs to be given to Vibead. Automated qualification used simulated model responses; your test checks your own account and provider too.
 
 ## 1. Download
 
