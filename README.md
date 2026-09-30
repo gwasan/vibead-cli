@@ -69,6 +69,8 @@ Beta.3 and earlier defaulted to this simulated test, and their interactive mode 
 
 ## Scope
 
+OpenCode beta.4 has a [known display issue with some thinking layouts](BETA.md#platform-notes). A corrected download is pending; successful ad decisions alone do not mean an ad was displayed.
+
 This is an explicit beta wrapper. Keep launching your ordinary agent directly whenever you do not want Vibead. Automatic activation through your usual command name remains later distribution work. Native permissions, trust prompts and organization policies still apply; unsupported cases preserve the agent's normal launch without ads.
 
 Source and server code remain private. Synthetic ads generate no earnings or credits. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.4) identify exact tested agents/platforms and limits; simulated-model qualification does not establish live-provider or physical-desktop acceptance.

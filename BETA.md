@@ -200,6 +200,8 @@ The separate automated authenticated mode requires `OPENAI_API_KEY` for Codex/Op
 
 ## Platform notes
 
+**OpenCode beta.4 display issue:** some normal thinking layouts are not recognized, including titled reasoning headers and the static spinner used with animations disabled. Ads may be assigned without becoming visible. A correction has passed local native-renderer tests but is not yet in these downloads. If affected, share your report and the status label you saw; do not change your OS, provider or working setup, or keep spending model turns on longer prompts to retry this issue.
+
 These builds are not publisher-signed or notarized. macOS uses an ad hoc signature; Windows may show an unrecognized-publisher warning. Hosted tests do not establish desktop approval or enterprise-policy behavior. Do not disable system-wide security controls to run a beta.
 
 Windows Codex teardown can print an `AttachConsole failed` helper warning even when display/cleanup checks pass. Retain the JSON report and check its status. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.4) identify tested versions, platforms and known limits.
