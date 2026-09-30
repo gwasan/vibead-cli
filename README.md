@@ -15,7 +15,7 @@ Current packaged-agent qualification:
 | Ubuntu 24.04 x64 | All four passed with simulated model responses |
 | macOS 15, Apple Silicon | All four passed with simulated model responses |
 | macOS 15, Intel | All four passed with simulated model responses |
-| Windows Server 2025 x64 | Testing in progress |
+| Windows Server 2025 x64 | All four passed with simulated model responses |
 
 These are candidate-build results. The exact published archives must pass qualification before download links appear. Authenticated-provider and physical-desktop acceptance remain separate stages. The tested agent versions are Codex 0.158.0, Claude Code 2.1.283, Gemini CLI 0.61.0 and OpenCode 1.18.33.
 
