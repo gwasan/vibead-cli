@@ -1,65 +1,48 @@
-# Test Vibead with your installed agent
+# Beta test: use your real AI model
 
-Use a qualified archive from [Releases](https://github.com/gwasan/vibead-cli/releases). If no release is listed, executable qualification is still in progress. You need an installed supported agent on your PATH; no private repository access, npm installation, compiler, Docker or separately managed ad server is needed for Vibead.
+**Start with an interactive session in Claude Code, Codex, Gemini CLI or OpenCode.** Use your own model account or gateway and submit your own prompts. Vibead supplies synthetic advertisements from a local mock service it starts automatically. You do not need a private repository, a separate ad server or a simulated test first.
 
-## Download and extract
+The commands below work with **beta.3**. The online guide is the current procedure; the guide inside an existing archive may still put the optional simulated test first.
 
-Choose the archive matching your computer:
+## 1. Download and extract
 
-| Computer | Archive platform |
+Get an archive and its `.sha256` file from [beta.3 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.3):
+
+| Computer | Archive ending |
 | --- | --- |
 | Mac with Apple Silicon | `darwin-arm64.tar.gz` |
 | Mac with Intel processor | `darwin-x64.tar.gz` |
 | Windows x64 | `win32-x64.zip` |
 | Linux x64 | `linux-x64.tar.gz` |
 
-Download its `.sha256` file too. On macOS, compare `shasum -a 256 ARCHIVE` with the checksum; on Linux use `sha256sum ARCHIVE`; on Windows use `Get-FileHash ARCHIVE -Algorithm SHA256`. Extract the complete archive and keep its files together. Open a terminal in the extracted `vibead-beta-PLATFORM-ARCHITECTURE` folder.
+Compare the archive's checksum with the value in the `.sha256` file. Replace `ARCHIVE` with the downloaded filename:
 
-These early beta builds are not publisher-signed or notarized. macOS uses an ad hoc signature; Windows may show an unrecognized-publisher warning. Physical-desktop approval and enterprise-policy behavior are not established by the hosted test results. Do not disable system-wide security controls to run a beta.
+| Terminal | Checksum command |
+| --- | --- |
+| macOS | `shasum -a 256 ARCHIVE` |
+| Linux | `sha256sum ARCHIVE` |
+| Windows PowerShell | `Get-FileHash ARCHIVE -Algorithm SHA256` |
 
-## Run one agent test
+Extract the complete archive and keep its files together. Open a terminal in the extracted `vibead-beta-PLATFORM-ARCHITECTURE` folder. Your chosen AI agent must already be installed and available in that terminal. Vibead itself needs no npm installation, compiler or Docker.
 
-macOS or Linux:
+## 2. Connect your model account
 
-```sh
-./vibead-beta claude
-./vibead-beta codex
-./vibead-beta gemini
-./vibead-beta opencode
-```
+Vibead opens the agent in a **temporary empty workspace**. Your normal saved login, provider settings and plugins are not copied. Complete the agent's sign-in/provider selection when it opens, or use a supported key already exported in this same terminal:
 
-Windows PowerShell:
+| Agent | Account or key for this test |
+| --- | --- |
+| Claude Code | Sign in inside Claude, or export `ANTHROPIC_API_KEY`. For a gateway token, use the setup below. |
+| Codex | Sign in inside Codex, or export `OPENAI_API_KEY`. Review Vibead's hooks in `/hooks` if requested. |
+| Gemini CLI | Select authentication inside Gemini, or export `GEMINI_API_KEY` / `GOOGLE_API_KEY` and select the matching method. |
+| OpenCode | Connect/select your provider inside OpenCode. For the OpenAI route, export `OPENAI_API_KEY` and select an available OpenAI model. |
 
-```powershell
-.\vibead-beta.exe claude
-.\vibead-beta.exe codex
-.\vibead-beta.exe gemini
-.\vibead-beta.exe opencode
-```
+Use a model your account can access. Select or change models inside the agent. Existing credentials in the shell are passed to the live session; do not paste tokens into prompts, command arguments, reports or issues. Provider charges may apply. Temporary login state is deleted when the test exits, so another session may require signing in again.
 
-Run only the commands for agents you have installed. Each command opens that real agent in a temporary empty workspace, starts its own synthetic ad service and local model simulator, and submits a fixed test prompt. It checks that a disclosed test ad replaces a supported thinking row, clears at completion and preserves the final answer. It then stops its services and removes the temporary agent configuration.
+Custom gateway environment passthrough in beta.3 is supported for the three Claude variables below. For the other agents, use the account/key methods above; their usual saved gateway settings are not imported.
 
-The default uses simulated model responses, with no provider API key or paid model request. Test ads are synthetic; there are no earnings or credits. Native hook trust and organization policies still apply. Normal agent settings are not modified.
+### Claude Code through your gateway (beta.3 or later)
 
-A successful run ends with `Vibead beta: passed` and the location of a JSON report under `vibead-beta-results` in your current directory. `failed` is a failed test, even if the agent itself answered. Retain the failed report if you retry. A slow ad request deliberately leaves the agent's native status unchanged.
-
-## Try your authenticated model afterward
-
-After the fixture passes, use your provider credentials already set in your shell or sign in within the temporary agent session:
-
-```sh
-./vibead-beta claude --mode interactive
-```
-
-On Windows, use `.\vibead-beta.exe claude --mode interactive`. Replace `claude` with your chosen agent. Submit a prompt that takes several seconds, wait for the answer, then exit the agent normally. The session has a ten-minute limit. Your usual stored login is not copied into the isolated home; a new login may be needed and the temporary login state is deleted afterward. Provider charges may apply. Do not put secrets in command arguments or reports.
-
-Authenticated-provider testing is a separate stage. Fixture success does not establish authenticated success. See the specific release notes for versions and platforms actually tested.
-
-## Claude Code through your gateway (beta.3 or later)
-
-Beta.2 filters out custom Claude gateway variables; download and extract a complete beta.3 or later archive first. In interactive and authenticated modes, Vibead forwards `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL` and `ANTHROPIC_AUTH_TOKEN` to Claude. The default fixture mode ignores these variables and uses its local simulator.
-
-For macOS's default **zsh**, run this from the extracted archive folder. Replace the URL and model with the values supplied by your gateway. Enter only the token at the hidden prompt, without a `Bearer ` prefix:
+If `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL` and `ANTHROPIC_AUTH_TOKEN` are already exported in your terminal, continue to step 3. Otherwise, this **macOS zsh** example sets them for one test. Replace the URL and model with your gateway's Anthropic-compatible endpoint and exact model identifier:
 
 ```zsh
 (
@@ -72,16 +55,65 @@ For macOS's default **zsh**, run this from the extracted archive folder. Replace
 )
 ```
 
-The parentheses keep these settings local to this test. Complete Claude's onboarding or workspace trust prompts if shown. Submit a prompt that takes several seconds, check that a disclosed test ad appears during thinking, wait for the complete answer, then exit Claude normally. A report is written under `vibead-beta-results`. This uses your real gateway for model responses; the ad service remains local and synthetic.
+Enter only the token at the hidden prompt, without a `Bearer ` prefix. This block starts Claude, so continue to step 4 afterward. The parentheses keep its settings local to this test. Beta.2 filtered these variables; use beta.3 or later. Claude adds the bearer prefix itself; see [Claude's gateway setup](https://code.claude.com/docs/en/llm-gateway-connect). Vibead does not add the token or gateway URL to its report.
 
-If you already exported the three variables, run `./vibead-beta claude --mode interactive` directly. For the automated factorial check instead, use `./vibead-beta claude --mode authenticated`. Automated mode accepts either `ANTHROPIC_AUTH_TOKEN` or `ANTHROPIC_API_KEY`; its `--model` option overrides `ANTHROPIC_MODEL`. Both live modes can incur provider charges.
+## 3. Start one agent
 
-Use the gateway's Anthropic-compatible endpoint and exact model identifier. Claude sends `ANTHROPIC_AUTH_TOKEN` as an `Authorization: Bearer` header; see [Claude's gateway setup](https://code.claude.com/docs/en/llm-gateway-connect). Vibead does not write this token or gateway URL to its report. Your normal saved Claude settings and login are not copied into the temporary workspace.
+Choose the row for your installed agent and your terminal. **Keep `--mode interactive`.**
 
-## Report the outcome and remove the beta
+| Agent | macOS / Linux | Windows PowerShell |
+| --- | --- | --- |
+| Claude Code | `./vibead-beta claude --mode interactive` | `.\vibead-beta.exe claude --mode interactive` |
+| Codex | `./vibead-beta codex --mode interactive` | `.\vibead-beta.exe codex --mode interactive` |
+| Gemini CLI | `./vibead-beta gemini --mode interactive` | `.\vibead-beta.exe gemini --mode interactive` |
+| OpenCode | `./vibead-beta opencode --mode interactive` | `.\vibead-beta.exe opencode --mode interactive` |
 
-Reports contain versions, timings and boolean checks, not prompt text, source code, terminal captures, model responses or credentials. They stay local. Review a report before choosing to share it in an issue, along with your OS, agent version and whether you used fixture or interactive mode. Avoid screenshots containing personal information.
+Complete any onboarding, provider, model or workspace-trust prompts. The terminal prints the unique `Beta … [Ad]…` phrase to look for. Each session has a ten-minute limit.
 
-This is an isolated display-test companion, not a persistent installed product. To remove it, exit any active beta session, then delete the extracted folder and any reports you no longer need. There is no system service or persistent activation to uninstall. Upgrade by extracting a newer complete archive into a new folder; do not mix files from different builds.
+## 4. Check the result
 
-Full product acceptance still requires persistent installation, upgrade, disable/enable, restoration, physical-terminal and authenticated-model checks. The local mock does not establish hosted latency, production authorization, advertiser delivery, impressions or earnings.
+1. Submit: “Compare five sorting algorithms and explain their tradeoffs. Do not use tools or change files.”
+2. During thinking, look for the disclosed `Beta … [Ad]…` message replacing the status text.
+3. Wait for the complete answer. Check that the ad disappears and the answer remains readable. Repeat with a longer prompt if the response finishes too quickly to show an ad.
+4. Exit the agent normally; for example, use `/exit` in Claude. Wait for Vibead's result and report path.
+
+A successful run ends with `Vibead beta: passed`. Reports are saved under `vibead-beta-results` in the folder where you launched Vibead. Your visual check of the answer matters: interactive mode observes turn completion but does not compare the answer against a predefined expected response.
+
+If a test fails, retain its report even if a retry passes. Review the JSON, then attach it to a [beta issue](https://github.com/gwasan/vibead-cli/issues) with your OS, agent version, selected model, test mode and what you observed. Reports stay local until you choose to share them. They contain versions, timings and checks, not prompt text, terminal captures, model responses or credentials. Do not share your token or private gateway address.
+
+## If something does not work
+
+| Symptom | Next step |
+| --- | --- |
+| The test submits a prompt and finishes by itself | You ran fixture mode. Add `--mode interactive` to use your real model. |
+| Agent executable missing | Check that the agent starts by its normal command in this terminal. Install/fix that agent first, then retry Vibead. |
+| Your usual login or provider is missing | Sign in or select the provider inside this temporary session, or use a supported exported key from step 2. |
+| Claude gateway authentication fails | Check the URL, model and token with your gateway operator; use beta.3 or later. Enter the token without `Bearer `. Do not share it in an issue. |
+| No ad appears | Wait for a longer response and check any native hook-trust prompt. A slow/unavailable ad or an unmatched thinking row leaves the agent's native output visible. Save the report if it still fails. |
+| `failed` or `blocked` | Keep the JSON report. These are not passes, even if the agent itself answered. |
+
+## Optional: simulated diagnostic and automated real-model check
+
+| Mode | What it does | When to use it |
+| --- | --- | --- |
+| `--mode interactive` | Your prompts and real model connection; local mock ads | **Primary beta test** of the actual customer experience |
+| `--mode fixture` | Fixed prompt and local simulated responses; no provider credentials | Diagnose display/integration problems without account setup or model charges |
+| `--mode authenticated` | Fixed factorial prompt through a real provider; requires a supported key/token | Additional automated check with a known final-answer marker |
+
+In beta.3, omitting `--mode` selects **fixture**, for every agent. For example, `./vibead-beta claude` is equivalent to `./vibead-beta claude --mode fixture`. Exporting real credentials does not change that default; fixture mode ignores them.
+
+Use `./vibead-beta AGENT --mode fixture` for the optional diagnostic, replacing `AGENT` with `claude`, `codex`, `gemini` or `opencode`. Windows uses `.\vibead-beta.exe`. Fixture success does not establish authenticated-provider success.
+
+For the automated real-model check, use `--mode authenticated --model YOUR_MODEL`. It requires `OPENAI_API_KEY` for Codex and OpenCode (OpenAI route), `GEMINI_API_KEY` for Gemini, or `ANTHROPIC_API_KEY` / `ANTHROPIC_AUTH_TOKEN` for Claude. Claude also accepts the gateway URL and model variables; `--model` overrides `ANTHROPIC_MODEL`. Provider charges may apply. You do not need this mode to complete the primary interactive test.
+
+## Platform notes
+
+These builds are not publisher-signed or notarized. macOS uses an ad hoc signature; Windows may show an unrecognized-publisher warning. Hosted tests do not establish physical-desktop approval or enterprise-policy behavior. Do not disable system-wide security controls to run a beta.
+
+A Windows Codex fixture teardown can print an `AttachConsole failed` helper message. The qualified runs passed the display and cleanup checks despite that warning; retain the JSON report and judge the result by its status. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.3) list the tested versions and remaining limits.
+
+## Remove or upgrade
+
+Exit the beta, then delete its extracted folder and reports you no longer need. No system service is installed. Upgrade by extracting a complete new archive into a fresh folder; do not mix files from different builds.
+
+This is an isolated display-test companion. Persistent installation, upgrade/restoration and full lifecycle acceptance remain later work. Synthetic ads generate no earnings or credits, and local tests do not establish production advertising or server performance.

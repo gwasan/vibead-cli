@@ -1,27 +1,10 @@
-# Vibead CLI beta
+# Try Vibead with your AI agent
 
-Vibead replaces supported AI coding agents' generic terminal thinking text with a short, visibly disclosed advertisement. If an ad is unavailable or a row cannot be safely matched, the agent keeps its native output.
+Vibead replaces supported terminal thinking text with a short, disclosed test advertisement. **The main beta test uses your real model account or gateway.** Vibead starts its own local mock ad service; you do not need to run a server or access a private repository.
 
-## Current status — September 30, 2026
+## 1. Download
 
-**[Beta v0.1.0-beta.3 is available](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.3).** This repository contains customer documentation; development source and server code remain private. No npm package or marketplace listing has been published.
-
-The compiled replacement core is checked against the original renderer for identical terminal output, Unicode handling, styling, clearing and resizing. The beta launcher manages its own temporary mock ad service and model simulator, so testers do not need private-repository access or manual server setup.
-
-Current packaged-agent qualification:
-
-| Hosted platform | Codex, Claude Code, Gemini CLI and OpenCode |
-| --- | --- |
-| Ubuntu 24.04 x64 | All four passed with simulated model responses |
-| macOS 15, Apple Silicon | All four passed with simulated model responses |
-| macOS 15, Intel | All four passed with simulated model responses |
-| Windows Server 2025 x64 | All four passed with simulated model responses |
-
-The exact published archives passed all 16 checks and independent manifest/checksum verification. Four additional Claude gateway tests passed, one per platform above, verifying bearer-token authentication and environment model selection against a local simulated gateway. Authenticated-provider and physical-desktop acceptance remain separate stages. The tested agent versions are Codex 0.158.0, Claude Code 2.1.283, Gemini CLI 0.61.0 and OpenCode 1.18.33.
-
-## Download and test
-
-Download the archive for your computer and its accompanying `.sha256` file from [Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.3), verify the checksum, and extract the complete folder.
+Download [beta.3](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.3) for your computer and its accompanying `.sha256` file. [Verify the checksum](BETA.md#1-download-and-extract), extract the complete archive, and open a terminal in the extracted folder. Keep its files together.
 
 | Computer | Download |
 | --- | --- |
@@ -30,30 +13,45 @@ Download the archive for your computer and its accompanying `.sha256` file from 
 | Windows x64 | [Windows ZIP](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.3/vibead-beta-0.1.0-beta.3-win32-x64.zip) |
 | Linux x64 | [Linux archive](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.3/vibead-beta-0.1.0-beta.3-linux-x64.tar.gz) |
 
- You need your chosen agent installed on your PATH. Vibead does not require npm, Docker, a compiler or a source checkout.
+Your chosen agent must already be installed and available in this terminal. Vibead itself needs no npm installation, Docker or compiler. These beta builds are not publisher-signed or notarized; see the [platform notes](BETA.md#platform-notes).
 
-Open a terminal in the extracted folder. On macOS/Linux:
+## 2. Start your agent with a real model
+
+On macOS or Linux, run **one** of these:
 
 ```sh
-./vibead-beta claude
+./vibead-beta claude --mode interactive
+./vibead-beta codex --mode interactive
+./vibead-beta gemini --mode interactive
+./vibead-beta opencode --mode interactive
 ```
 
-On Windows PowerShell:
+On Windows PowerShell, replace `./vibead-beta` with `.\vibead-beta.exe`, keeping the agent name and `--mode interactive`.
 
-```powershell
-.\vibead-beta.exe claude
-```
+Sign in or select your provider inside the agent, or use a [supported API key already exported in your shell](BETA.md#2-connect-your-model-account). Vibead opens a temporary empty workspace; it does not copy your usual saved login or agent settings. Provider charges may apply.
 
-Replace `claude` with `codex`, `gemini` or `opencode`. The default test uses the real agent UI with simulated local model responses and synthetic local ads. It checks replacement, clearing, preserved answers and cleanup, then saves a local pass/fail report. No provider key or paid model request is needed for this stage.
+**Using a Claude gateway?** Follow the [URL, model and token setup](BETA.md#claude-code-through-your-gateway-beta3-or-later) before starting. It requires beta.3 or later.
 
-After the fixture passes, `--mode interactive` lets you test an authenticated model in an isolated session. **For a Claude gateway, beta.3 forwards `ANTHROPIC_BASE_URL`, `ANTHROPIC_MODEL` and `ANTHROPIC_AUTH_TOKEN`; beta.2 did not.** See the [Claude gateway commands](BETA.md#claude-code-through-your-gateway-beta3-or-later). A new vendor login or API key may be needed, and provider charges may apply. Automated authenticated-model qualification remains paused pending provider credentials.
+## 3. Check the ad and share your result
 
-[Read the beta testing guide](BETA.md) for platform selection, commands, reports and removal.
+1. Complete any agent onboarding or hook-trust prompts. For Codex, check `/hooks` if requested.
+2. Ask: “Compare five sorting algorithms and explain their tradeoffs. Do not use tools or change files.”
+3. Watch for the `Beta … [Ad]…` message during thinking. It should disappear when the turn finishes, with the answer still readable. Try a longer prompt if the first answer is too fast.
+4. Exit the agent normally. Vibead prints `passed`, `failed` or `blocked` and a JSON report path under `vibead-beta-results`.
+5. Review the report, then share it in a [beta issue](https://github.com/gwasan/vibead-cli/issues) with your OS, agent version and what you observed. Never share credentials.
 
-## Beta scope
+You do not need to pass a simulated test first. The [full testing guide](BETA.md) covers authentication, Windows commands, troubleshooting and removal.
 
-This is an isolated display-test companion, not a persistent installation. It offers no earnings or credits. Persistent installation, upgrade, disable/enable and full lifecycle acceptance remain later release work.
+## Why include `--mode interactive`?
 
-The initial builds are not publisher-signed/notarized; operating-system approval may be required. Keep all extracted files together. To remove the beta, exit it and delete its folder and any local reports you no longer need.
+In beta.3, `./vibead-beta claude` **works, but runs the automated simulated-model test**. The same default applies to all four agents. Use `--mode interactive` for the primary beta test: your prompts, your actual model connection, and your terminal. Ads remain local and synthetic in both modes.
 
-A Windows Codex fixture teardown can print an `AttachConsole failed` helper message; the qualified run still passed the display and cleanup checks. See the release notes and retain the JSON report if this occurs.
+For an optional no-credentials diagnostic, run `./vibead-beta claude --mode fixture`, replacing `claude` with your agent. A simulated pass does not establish that your real model connection works.
+
+## What has been verified?
+
+Beta.3 passed all sixteen packaged-agent simulated tests across Ubuntu 24.04 x64, macOS 15 Apple Silicon, macOS 15 Intel and Windows Server 2025 x64. Four additional Claude gateway checks passed using a local simulator. Tested agents: Codex 0.158.0, Claude Code 2.1.283, Gemini CLI 0.61.0 and OpenCode 1.18.33. These results do not establish success with your provider, model or desktop terminal; that is what the primary beta test helps check.
+
+This beta is an isolated display-test companion. Persistent installation and full lifecycle acceptance remain later work. Test ads generate no earnings or credits. Source and server code remain private; no npm package or marketplace listing has been published.
+
+This online guide is the current procedure. Instructions bundled in an earlier download may still lead with the simulated test; the beta.3 commands above work with the existing download.
