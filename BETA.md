@@ -1,8 +1,63 @@
 # Beta test with your existing AI agent setup
 
-**Beta.5 keeps the setup you already use:** your home directory, saved login, model/provider configuration, custom configuration directories, project files, settings, plugins and exported environment. You launch through Vibead from your usual project, and it adds local mock advertisements during supported thinking states.
+**Beta.6 keeps the setup you already use:** your home directory, saved login, model/provider configuration, custom configuration directories, project files, settings, plugins and exported environment. You launch through Vibead from your usual project, and it adds local mock advertisements during supported thinking states.
 
 No new account setup, private checkout or separate ad server is required by Vibead. Your agent's own permissions, trust prompts and provider charges still apply.
+
+**Beta.6 adds optional clickable test ads.** Follow the [click-test instructions](#optional-clickable-ad-test-beta6). Older beta.5 downloads do not contain this feature; extract the complete beta.6 archive.
+
+## Optional clickable-ad test (beta.6)
+
+This tests a synthetic ad opening a local browser page. It uses your existing agent account and project, starts its mock service automatically, and makes no advertiser requests. It does not test paid clicks, cash balances or payouts.
+
+1. Check the executable before starting: `"/path/to/vibead-beta" --help` on macOS/Linux, or `& "C:\path\to\vibead-beta.exe" --help` in PowerShell. It must list `--test-links`. Keep the complete beta.6 archive together; do not copy the executable over a beta.5 folder.
+2. Open your usual project in a terminal from this table, directly rather than inside tmux or screen:
+
+| Platform | Initial link-test terminal | Open the ad |
+| --- | --- | --- |
+| macOS | iTerm2 | Hold Command and click the word `Beta` |
+| Windows | Windows Terminal | Hold Ctrl and click the word `Beta` |
+| Linux | A modern VTE terminal, such as GNOME Terminal | Use the terminal's Open Link gesture/menu, commonly Ctrl+click |
+
+These are initial capability checks, not a claim of physical-desktop qualification. Apple Terminal and unidentified terminals currently keep plain text. Remote/SSH sessions are outside this local-browser test: `127.0.0.1` must refer to the computer running both Vibead and the browser. Do not override terminal variables to force support.
+
+3. Run one agent at a time, using the path to beta.6. No `--mode interactive` is needed:
+
+```sh
+"/path/to/vibead-beta" claude --test-links
+"/path/to/vibead-beta" codex --test-links
+"/path/to/vibead-beta" gemini --test-links
+"/path/to/vibead-beta" opencode --test-links
+```
+
+On a Mac where you already set `VIBEAD_BETA` to beta.6, use `"$VIBEAD_BETA" claude --test-links`, changing the agent name as needed. PowerShell example:
+
+```powershell
+& "C:\path\to\vibead-beta.exe" claude --test-links
+```
+
+Keep gateway variables and saved logins as they normally are. Native agent arguments still follow `--`, for example `"/path/to/vibead-beta" claude --test-links -- --model my-model`.
+
+4. Send a normal prompt that gives you a few seconds to observe thinking. While `Beta … [Ad]…` is visible, open the link on **the word Beta**, using the gesture above. The random label, disclosure and adjacent agent text must not be part of the link. Nothing should open until you deliberately click.
+5. The browser must show **Vibead local click test** at `http://127.0.0.1:<port>/beta/click/...`. Press **Confirm I opened the test ad**. Expect **Click test confirmed**, then return to the agent. Keep the agent session open until confirmation; the mock service stops when you exit. Do not paste this temporary URL into an issue.
+6. Complete the checklist below, then exit the agent normally. Review the JSON report under `~/.vibead-beta/results`.
+
+| Check | Expected result |
+| --- | --- |
+| Existing setup | Your usual model, provider, project and permissions remain in use |
+| No automatic browsing | No page opens until your deliberate click |
+| Thinking and completion | Ad appears only during supported thinking and clears immediately at completion |
+| Link boundary | Only the word Beta opens the local page; `[Ad]`, the random label, answers and native controls are not linked |
+| Confirmation | Local page opens; pressing Confirm records one confirmation even if pressed again |
+| Second turn and interruption | A new turn works; interrupting clears the ad without opening anything |
+| Narrow/resize | Disclosure remains visible; if sponsor text is shortened its link is omitted, or native status is retained |
+| Plain-text control | Relaunch without `--test-links`; the ad has no clickable metadata and the agent still works normally |
+
+The click test passes only when the ordinary display checks pass, `click_test.status` is `passed`, `hyperlink_overlays_prepared` is greater than zero, and `confirmed_visits` is greater than zero. `page_requests` alone is insufficient. Counts are local diagnostic evidence, not proof of a billable click or a human view. No automated program can certify what you personally saw; include your observation with the report.
+
+If `terminal_support` is `unknown` or `multiplexer_unverified`, the requested click test is blocked and ads remain plain text. If link rendering or confirmation was not observed, `click_test.status` is `not_observed`; do not report that as a click pass. When renderer `matching_rows` is zero, report the display failure first. Very short turns may legitimately show no ad. Widen the window if the sponsor text is truncated.
+
+Share the reviewed report JSON, archive version, terminal application/version, agent version, OS, and which checklist items passed or failed. Do not share tokens, configuration backups, model transcripts or temporary click URLs. Nothing is uploaded automatically. User cash sharing and withdrawals after network settlement belong to a future approved monetized pilot; this beta creates no monetary balance.
 
 ## Mac quick start: Claude Code, Codex and OpenCode
 
@@ -12,8 +67,8 @@ No new account setup, private checkout or separate ad server is required by Vibe
 
 | Your Mac | Archive | Checksum file |
 | --- | --- | --- |
-| Apple Silicon | [Download ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-arm64.tar.gz) | [ARM64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-arm64.tar.gz.sha256) |
-| Intel | [Download x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-x64.tar.gz) | [x64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.5/vibead-beta-0.1.0-beta.5-darwin-x64.tar.gz.sha256) |
+| Apple Silicon | [Download ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz) | [ARM64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz.sha256) |
+| Intel | [Download x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz) | [x64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz.sha256) |
 
 2. In Terminal, run the block for **your Mac only**. It checks the download and extracts it only if the checksum matches. These commands leave your terminal's working directory unchanged.
 
@@ -22,8 +77,8 @@ Apple Silicon:
 ```sh
 (
   cd "$HOME/Downloads" &&
-  shasum -a 256 -c vibead-beta-0.1.0-beta.5-darwin-arm64.tar.gz.sha256 &&
-  tar -xzf vibead-beta-0.1.0-beta.5-darwin-arm64.tar.gz
+  shasum -a 256 -c vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz.sha256 &&
+  tar -xzf vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz
 )
 ```
 
@@ -32,8 +87,8 @@ Intel:
 ```sh
 (
   cd "$HOME/Downloads" &&
-  shasum -a 256 -c vibead-beta-0.1.0-beta.5-darwin-x64.tar.gz.sha256 &&
-  tar -xzf vibead-beta-0.1.0-beta.5-darwin-x64.tar.gz
+  shasum -a 256 -c vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz.sha256 &&
+  tar -xzf vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz
 )
 ```
 
@@ -73,7 +128,7 @@ Repeat for each installed agent and share one report per agent. Include your Mac
 open "$HOME/.vibead-beta/results"
 ```
 
-If you only see `Vibead beta: passed` from an automatic test without your normal session, check that you downloaded **beta.5** and omitted `--mode fixture`. Older releases used the simulated test by default.
+If you only see `Vibead beta: passed` from an automatic test without your normal session, check that you downloaded **beta.6** and omitted `--mode fixture`. Older releases used the simulated test by default.
 
 If macOS blocks the executable, see [platform notes](#platform-notes). If you force-killed a session, use the [recovery command](#recovery-after-a-crash-or-forced-termination) before trying again or deleting the folder.
 
@@ -81,7 +136,7 @@ Gemini is also supported on qualified Mac builds: use `"$VIBEAD_BETA" gemini`. U
 
 ## 1. Download
 
-Get an archive and its `.sha256` file from [beta.5 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5):
+Get an archive and its `.sha256` file from [beta.6 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.6):
 
 | Computer | Archive ending |
 | --- | --- |
@@ -210,7 +265,7 @@ Release notes list combinations actually tested. Other OS versions, terminal app
 
 These builds are not publisher-signed or notarized. macOS uses an ad hoc signature; Windows may show an unrecognized-publisher warning. Hosted tests do not establish desktop approval or enterprise-policy behavior. Do not disable system-wide security controls to run a beta.
 
-Windows Codex teardown can print an `AttachConsole failed` helper warning even when display/cleanup checks pass. Retain the JSON report and check its status. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5) identify tested versions, platforms and known limits.
+Windows Codex teardown can print an `AttachConsole failed` helper warning even when display/cleanup checks pass. Retain the JSON report and check its status. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.6) identify tested versions, platforms and known limits.
 
 ## Remove or upgrade
 
