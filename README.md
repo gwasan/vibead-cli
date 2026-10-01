@@ -1,22 +1,24 @@
 # Try Vibead with your usual AI agent setup
 
-Vibead adds disclosed test advertisements to supported thinking rows in **Claude Code, Codex, Gemini CLI and OpenCode**. Beta.6 uses your existing login, model/provider configuration, settings and current project. Its local mock ad service starts automatically.
+Vibead adds disclosed test advertisements to supported thinking rows in **Claude Code, Codex, Gemini CLI and OpenCode**. Beta.7 uses your existing login, model/provider configuration, settings and current project. Its local mock ad service starts automatically.
 
-**Optional clickable ads:** add `--test-links` to test opening a synthetic ad in your browser. The [click-test checklist](BETA.md#optional-clickable-ad-test-beta6) covers all four agents and supported terminal families. No advertiser requests or earnings are generated.
+**OpenCode fix:** beta.7 recognizes the activity dots beside `esc interrupt`, including sessions without a Thinking label. The model/agent label and interrupt controls remain native.
+
+**Optional clickable ads:** add `--test-links` to test opening a synthetic ad in your browser. The [click-test checklist](BETA.md#optional-clickable-ad-test-beta7) covers all four agents and supported terminal families. No advertiser requests or earnings are generated.
 
 **Mac downloads are ready for beta testing.** Follow the [Mac quick start for Claude Code, Codex and OpenCode](BETA.md#mac-quick-start-claude-code-codex-and-opencode) for direct downloads, copy-and-paste checksum/extraction commands and a test checklist. You can use your existing Claude gateway or agent login. No API key needs to be given to Vibead. Automated qualification used simulated model responses; your test checks your own account and provider too.
 
 ## 1. Download
 
-Download the complete archive and its `.sha256` file from [beta.6 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.6). [Verify the checksum](BETA.md#1-download), then extract it somewhere convenient and keep its files together.
+Download the complete archive and its `.sha256` file from [beta.7 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.7). [Verify the checksum](BETA.md#1-download), then extract it somewhere convenient and keep its files together.
 
 | Computer | Download |
 | --- | --- |
-| Apple Silicon Mac | [macOS ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz) |
-| Intel Mac | [macOS x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz) |
-| Linux x64 | [Linux archive](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-linux-x64.tar.gz) |
+| Apple Silicon Mac | [macOS ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.7/vibead-beta-0.1.0-beta.7-darwin-arm64.tar.gz) |
+| Intel Mac | [macOS x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.7/vibead-beta-0.1.0-beta.7-darwin-x64.tar.gz) |
+| Linux x64 | [Linux archive](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.7/vibead-beta-0.1.0-beta.7-linux-x64.tar.gz) |
 
-**Windows beta.6 is deferred.** The [previous beta.5 release](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5) remains available for plain-ad testing; it does not support `--test-links`. This release targets Mac and Linux.
+**Windows beta.7 is deferred.** The [previous beta.5 release](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5) remains available for plain-ad testing; it does not support `--test-links`. This release targets Mac and Linux.
 
 Your agent must already work in your terminal. Vibead needs no private repository, npm installation, compiler or separately managed server. These beta builds are not publisher-signed or notarized; see the [platform notes](BETA.md#platform-notes).
 
@@ -68,12 +70,12 @@ Exit the agent normally. Vibead removes its session integration and prints the l
 
 `"/path/to/vibead-beta" claude --mode fixture` runs the old isolated simulated-model test without credentials or model charges. Replace `claude` with any of the four agents. This is optional; it does not test your usual account or configuration.
 
-Beta.3 and earlier defaulted to this simulated test, and their interactive mode used an empty temporary home. Upgrade the complete archive to beta.6 for the existing-setup experience.
+Beta.3 and earlier defaulted to this simulated test, and their interactive mode used an empty temporary home. Upgrade the complete archive to beta.7 for the existing-setup experience.
 
 ## Scope
 
-Beta.6 retains OpenCode’s titled/static thinking-label support introduced in beta.5. It adds optional local click testing without changing the default plain-text experience. Successful ad decisions alone do not mean an ad was displayed; check the report and the screen.
+Beta.7 adds OpenCode’s activity-only status layout and retains the earlier thinking-label support and optional local click testing without changing the default plain-text experience. Successful ad decisions alone do not mean an ad was displayed; check the report and the screen.
 
 This is an explicit beta wrapper. Keep launching your ordinary agent directly whenever you do not want Vibead. Automatic activation through your usual command name remains later distribution work. Native permissions, trust prompts and organization policies still apply; unsupported cases preserve the agent's normal launch without ads.
 
-Source and server code remain private. Synthetic ads generate no earnings or credits. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.6) identify exact tested agents/platforms and limits; simulated-model qualification does not establish live-provider or physical-desktop acceptance.
+Source and server code remain private. Synthetic ads generate no earnings or credits. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.7) identify exact tested agents/platforms and limits; simulated-model qualification does not establish live-provider or physical-desktop acceptance.

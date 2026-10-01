@@ -1,16 +1,20 @@
 # Beta test with your existing AI agent setup
 
-**Beta.6 keeps the setup you already use:** your home directory, saved login, model/provider configuration, custom configuration directories, project files, settings, plugins and exported environment. You launch through Vibead from your usual project, and it adds local mock advertisements during supported thinking states.
+**Beta.7 keeps the setup you already use:** your home directory, saved login, model/provider configuration, custom configuration directories, project files, settings, plugins and exported environment. You launch through Vibead from your usual project, and it adds local mock advertisements during supported thinking states.
 
 No new account setup, private checkout or separate ad server is required by Vibead. Your agent's own permissions, trust prompts and provider charges still apply.
 
-**Beta.6 adds optional clickable test ads.** Follow the [click-test instructions](#optional-clickable-ad-test-beta6). Use the complete beta.6 archive for Mac or Linux; older beta.5 downloads do not contain this feature. **Windows beta.6 is deferred to the backlog.** The [previous Windows beta.5 release](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5) remains available for plain-ad testing only.
+**Beta.7 fixes OpenCode activity-only status rows:** an animated indicator beside `esc interrupt` can now show the test ad without requiring a Thinking label. The Build/model label and interrupt hint remain native; right-hand controls and a visible sidebar retain their columns. Retest with your usual provider in Apple Terminal; no `--test-links` is needed for plain ads.
 
-## Optional clickable-ad test (beta.6)
+**Beta.7 includes optional clickable test ads.** Follow the [click-test instructions](#optional-clickable-ad-test-beta7). Use the complete beta.7 archive for Mac or Linux; older beta.5 downloads do not contain this feature. **Windows beta.7 is deferred to the backlog.** The [previous Windows beta.5 release](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.5) remains available for plain-ad testing only.
+
+<a id="optional-clickable-ad-test-beta6"></a>
+
+## Optional clickable-ad test (beta.7)
 
 This tests a synthetic ad opening a local browser page. It uses your existing agent account and project, starts its mock service automatically, and makes no advertiser requests. It does not test paid clicks, cash balances or payouts.
 
-1. Check the executable before starting: `"/path/to/vibead-beta" --help` on macOS/Linux. It must list `--test-links`. Keep the complete beta.6 archive together; do not copy the executable over a beta.5 folder.
+1. Check the executable before starting: `"/path/to/vibead-beta" --help` on macOS/Linux. It must list `--test-links`. Keep the complete beta.7 archive together; do not copy the executable over a beta.5 folder.
 2. Open your usual project in a terminal from this table, directly rather than inside tmux or screen:
 
 | Platform | Initial link-test terminal | Open the ad |
@@ -20,7 +24,7 @@ This tests a synthetic ad opening a local browser page. It uses your existing ag
 
 These are initial capability checks, not a claim of physical-desktop qualification. Apple Terminal and unidentified terminals currently keep plain text. Remote/SSH sessions are outside this local-browser test: `127.0.0.1` must refer to the computer running both Vibead and the browser. Do not override terminal variables to force support.
 
-3. Run one agent at a time, using the path to beta.6. No `--mode interactive` is needed:
+3. Run one agent at a time, using the path to beta.7. No `--mode interactive` is needed:
 
 ```sh
 "/path/to/vibead-beta" claude --test-links
@@ -29,7 +33,7 @@ These are initial capability checks, not a claim of physical-desktop qualificati
 "/path/to/vibead-beta" opencode --test-links
 ```
 
-On a Mac where you already set `VIBEAD_BETA` to beta.6, use `"$VIBEAD_BETA" claude --test-links`, changing the agent name as needed. Windows clickable-ad testing is not included in this release.
+On a Mac where you already set `VIBEAD_BETA` to beta.7, use `"$VIBEAD_BETA" claude --test-links`, changing the agent name as needed. Windows clickable-ad testing is not included in this release.
 
 Keep gateway variables and saved logins as they normally are. Native agent arguments still follow `--`, for example `"/path/to/vibead-beta" claude --test-links -- --model my-model`.
 
@@ -62,8 +66,8 @@ Share the reviewed report JSON, archive version, terminal application/version, a
 
 | Your Mac | Archive | Checksum file |
 | --- | --- | --- |
-| Apple Silicon | [Download ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz) | [ARM64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz.sha256) |
-| Intel | [Download x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz) | [x64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.6/vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz.sha256) |
+| Apple Silicon | [Download ARM64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.7/vibead-beta-0.1.0-beta.7-darwin-arm64.tar.gz) | [ARM64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.7/vibead-beta-0.1.0-beta.7-darwin-arm64.tar.gz.sha256) |
+| Intel | [Download x64](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.7/vibead-beta-0.1.0-beta.7-darwin-x64.tar.gz) | [x64 checksum](https://github.com/gwasan/vibead-cli/releases/download/v0.1.0-beta.7/vibead-beta-0.1.0-beta.7-darwin-x64.tar.gz.sha256) |
 
 2. In Terminal, run the block for **your Mac only**. It checks the download and extracts it only if the checksum matches. These commands leave your terminal's working directory unchanged.
 
@@ -72,8 +76,8 @@ Apple Silicon:
 ```sh
 (
   cd "$HOME/Downloads" &&
-  shasum -a 256 -c vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz.sha256 &&
-  tar -xzf vibead-beta-0.1.0-beta.6-darwin-arm64.tar.gz
+  shasum -a 256 -c vibead-beta-0.1.0-beta.7-darwin-arm64.tar.gz.sha256 &&
+  tar -xzf vibead-beta-0.1.0-beta.7-darwin-arm64.tar.gz
 )
 ```
 
@@ -82,8 +86,8 @@ Intel:
 ```sh
 (
   cd "$HOME/Downloads" &&
-  shasum -a 256 -c vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz.sha256 &&
-  tar -xzf vibead-beta-0.1.0-beta.6-darwin-x64.tar.gz
+  shasum -a 256 -c vibead-beta-0.1.0-beta.7-darwin-x64.tar.gz.sha256 &&
+  tar -xzf vibead-beta-0.1.0-beta.7-darwin-x64.tar.gz
 )
 ```
 
@@ -113,9 +117,11 @@ If you extracted elsewhere, change the path. This variable lasts for the current
 
 Review any native trust prompt. In Codex, review the Vibead hooks and approve the ones you intend to run; `/hooks` opens the hook controls. Vibead does not approve customer hooks automatically. Close the hook menu before sending your prompt.
 
-Ask a normal question, or try: “Compare five sorting algorithms and explain their tradeoffs. Do not use tools or change files.” Look for `Beta … [Ad]…` while the agent thinks, then check that the ad disappears and the answer remains readable. Very short turns may show no ad. Your normal model billing applies; the ad is local and synthetic.
+Ask a normal question, or try: “Compare five sorting algorithms and explain their tradeoffs. Do not use tools or change files.” Look for `Beta … [Ad]…` while the agent works (for OpenCode, beside `esc interrupt`), then check that the ad disappears and the answer remains readable. Very short turns may show no ad. Your normal model billing applies; the ad is local and synthetic.
 
 Exit normally and review the report printed by Vibead, under `~/.vibead-beta/results`. Share only that report JSON and your observations in a [beta issue](https://github.com/gwasan/vibead-cli/issues). A `failed` or `blocked` report is not a pass even if the agent answered. The report section below explains what is recorded.
+
+For OpenCode, also check that the ad clears at completion and that `tab agents`, `ctrl+p commands` and the sidebar remain readable in the same positions. Try the same wide-window layout you normally use.
 
 Repeat for each installed agent and share one report per agent. Include your Mac chip, macOS version, agent version, whether the ad appeared during thinking, and whether the answer and normal agent behavior stayed intact. To find the reports in Finder:
 
@@ -123,7 +129,7 @@ Repeat for each installed agent and share one report per agent. Include your Mac
 open "$HOME/.vibead-beta/results"
 ```
 
-If you only see `Vibead beta: passed` from an automatic test without your normal session, check that you downloaded **beta.6** and omitted `--mode fixture`. Older releases used the simulated test by default.
+If you only see `Vibead beta: passed` from an automatic test without your normal session, check that you downloaded **beta.7** and omitted `--mode fixture`. Older releases used the simulated test by default.
 
 If macOS blocks the executable, see [platform notes](#platform-notes). If you force-killed a session, use the [recovery command](#recovery-after-a-crash-or-forced-termination) before trying again or deleting the folder.
 
@@ -131,7 +137,7 @@ Gemini is also supported on qualified Mac builds: use `"$VIBEAD_BETA" gemini`. U
 
 ## 1. Download
 
-Get an archive and its `.sha256` file from [beta.6 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.6):
+Get an archive and its `.sha256` file from [beta.7 Releases](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.7):
 
 | Computer | Archive ending |
 | --- | --- |
@@ -259,7 +265,7 @@ Release notes list combinations actually tested. Other OS versions, terminal app
 
 These builds are not publisher-signed or notarized. macOS uses an ad hoc signature; Windows may show an unrecognized-publisher warning. Hosted tests do not establish desktop approval or enterprise-policy behavior. Do not disable system-wide security controls to run a beta.
 
-Windows Codex teardown can print an `AttachConsole failed` helper warning even when display/cleanup checks pass. Retain the JSON report and check its status. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.6) identify tested versions, platforms and known limits.
+Windows Codex teardown can print an `AttachConsole failed` helper warning even when display/cleanup checks pass. Retain the JSON report and check its status. [Release notes](https://github.com/gwasan/vibead-cli/releases/tag/v0.1.0-beta.7) identify tested versions, platforms and known limits.
 
 ## Remove or upgrade
 
