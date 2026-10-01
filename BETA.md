@@ -1,3 +1,7 @@
+**Vibead has moved to [vibead/cli](https://github.com/vibead/cli).** Use the [current downloads](https://github.com/vibead/cli/releases/tag/v0.1.0-beta.8) and [current beta guide](https://github.com/vibead/cli/blob/main/BETA.md). This repository is retained as an archived historical fallback. Beta.8 still has a reported OpenCode later-turn ad-display defect; investigation is deferred. The historical instructions below do not establish that the defect is resolved.
+
+---
+
 # Beta test with your existing AI agent setup
 
 **Beta.8 keeps the setup you already use:** your home directory, saved login, model/provider configuration, custom configuration directories, project files, settings, plugins and exported environment. You launch through Vibead from your usual project, and it adds local mock advertisements during supported thinking states.

@@ -1,3 +1,7 @@
+**Vibead has moved to [vibead/cli](https://github.com/vibead/cli).** Use the [current downloads](https://github.com/vibead/cli/releases/tag/v0.1.0-beta.8) and [current beta guide](https://github.com/vibead/cli/blob/main/BETA.md). This repository is retained as an archived historical fallback. Beta.8 still has a reported OpenCode later-turn ad-display defect; investigation is deferred. The historical instructions below do not establish that the defect is resolved.
+
+---
+
 # Try Vibead with your usual AI agent setup
 
 Vibead adds disclosed test advertisements to supported thinking rows in **Claude Code, Codex, Gemini CLI and OpenCode**. Beta.8 uses your existing login, model/provider configuration, settings and current project. Its local mock ad service starts automatically.
